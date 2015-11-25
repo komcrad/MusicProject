@@ -43,6 +43,20 @@ public class Database {
 		return true;
 	}
 	
+	public static boolean updateDatabase(Object obj) {
+		Session session = getNewSession();
+		try {
+			session.beginTransaction();
+			session.update(obj);
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		session.close();
+		return true;
+	}
+	
 	/**
 	 * Takes in a list of objects and saves them to the database.
 	 * @param objs  The list of objects you want to save

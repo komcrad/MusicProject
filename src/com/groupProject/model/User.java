@@ -1,14 +1,18 @@
 package com.groupProject.model;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import org.hibernate.Session;
 
@@ -243,25 +247,42 @@ public class User {
 		User user = (User) Database.runQuery(hql).get(0);
 		return user;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public static List<Song> getUserSongs(User user) {
+		String hql = "from Song where user_userId = "+user.getUserId();
+		return Database.runQuery(hql);
+	}
 	//Tests the functionality of this test
 	public static void main(String[] args) {
-		User user = new User("bob@gmail.com", "Bob", "Yakman", "1111 Nowhere St.", "Pretendville", 
-				"FL", "62221", "Rock,Pop", "", 'M', "PASSWoRD!");
-		HashMap<String, String> hm = user.getUserErrors();
-		System.out.println(hm.get("firstName"));
-		System.out.println(hm.get("lastName"));
-		System.out.println(hm.get("email"));
-		System.out.println(hm.get("city"));
-		System.out.println(hm.get("state"));
-		System.out.println(hm.get("zip"));
-		System.out.println(hm.get("musicPrefrences"));
-		System.out.println(hm.get("sex"));
-		System.out.println(hm.get("password"));
-		user.saveUser();
-		user = null;
-		user = getUserByEmail("bob@gmail.com");
-		System.out.println(user.toString());
-		Database.kill();
+//		User user = new User("bob@gmail.com", "Bob", "Yakman", "1111 Nowhere St.", "Pretendville", 
+//				"FL", "62221", "Rock,Pop", "", 'M', "PASSWoRD!");
+//		HashMap<String, String> hm = user.getUserErrors();
+//		System.out.println(hm.get("firstName"));
+//		System.out.println(hm.get("lastName"));
+//		System.out.println(hm.get("email"));
+//		System.out.println(hm.get("city"));
+//		System.out.println(hm.get("state"));
+//		System.out.println(hm.get("zip"));
+//		System.out.println(hm.get("musicPrefrences"));
+//		System.out.println(hm.get("sex"));
+//		System.out.println(hm.get("password"));
+//		user.saveUser();
+//		user = null;
+//		User user = getUserByEmail("bob@gmail.com");
+//		Song song = new Song("Dangerous", "Listen", "04:29", "David Guetta", "Computer", user);
+//		song.saveSong();
+//		String hql = "from User u where u.email = 'bob@gmail.com'";
+//		User user = getUserByEmail("bob@gmail.com");
+//		user.setEmail("useAHoe@gmail.com");
+//		System.out.println(user.getEmail());
+//		System.out.println(Database.updateDatabase(user));
+		
+//		System.out.println(user.toString());
+//		User.getUserSongs(user).forEach(e -> {
+//			System.out.println(e.toString());
+//		});
+//		Database.kill();
 	}
 	
 }
