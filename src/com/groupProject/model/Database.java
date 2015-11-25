@@ -28,16 +28,17 @@ public class Database {
 	 * @return  if exception occurs false is returned; else true
 	 */
 	public static boolean saveToDatabase(Object obj) {
+		Session session = getNewSession();
 		try {
-			Session session = getNewSession();
 			session.beginTransaction();
 			session.save(obj);
 			session.getTransaction().commit();
-			session.close();
 		} catch (Exception e) {
+			session.getTransaction().rollback();
 			e.printStackTrace();
 			return false;
 		}
+		session.close();
 		return true;
 	}
 	
@@ -52,15 +53,6 @@ public class Database {
 	}
 	public static void kill() {
 		sessionFactory.close();
-	}
-	
-	//test
-	public static void main(String[] args) {
-		User user = new User("sam", "password!", "male");
-		saveToDatabase(user);
-		user = new User("kornad", "fsdgaga!", "female");
-		saveToDatabase(user);
-		kill();
 	}
 }
 
