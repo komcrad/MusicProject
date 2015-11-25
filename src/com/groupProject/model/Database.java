@@ -3,6 +3,7 @@ package com.groupProject.model;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -50,6 +51,14 @@ public class Database {
 		objs.forEach(obj -> {
 			saveToDatabase(obj);
 		});
+	}
+	
+	public static List runQuery(String queryString) {
+		Session session = getNewSession();
+		Query query = session.createQuery(queryString);
+		List results = query.list();
+		session.close();
+		return results;
 	}
 	public static void kill() {
 		sessionFactory.close();

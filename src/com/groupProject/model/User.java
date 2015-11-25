@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.hibernate.Session;
+
 @Entity
 public class User {
 	@Id
@@ -236,6 +238,11 @@ public class User {
 		return false;
 	}
 
+	public static User getUserByEmail(String email) {
+		String hql = "from User u where u.email = '"+email+"'";
+		User user = (User) Database.runQuery(hql).get(0);
+		return user;
+	}
 	//Tests the functionality of this test
 	public static void main(String[] args) {
 		User user = new User("bob@gmail.com", "Bob", "Yakman", "1111 Nowhere St.", "Pretendville", 
@@ -250,8 +257,10 @@ public class User {
 		System.out.println(hm.get("musicPrefrences"));
 		System.out.println(hm.get("sex"));
 		System.out.println(hm.get("password"));
-		System.out.println(user.toString());
 		user.saveUser();
+		user = null;
+		user = getUserByEmail("bob@gmail.com");
+		System.out.println(user.toString());
 		Database.kill();
 	}
 	
