@@ -202,12 +202,16 @@ public class User {
 			errors.put("zip", "Zip must contain 5 of the form #####, or 9 numeric characters of the form #####-####");
 		}
 		List<String> options = Arrays.asList("Rock,Classic,Jazz,Country,Pop,Alternative,Rap".split(","));
-		Arrays.asList(this.getMusicPreference().split(",")).forEach((e) -> {
-			if (!options.contains(e)) {
-				errors.put("musicPrefrences", "That was not an option");
-				return;
-			}
-		});
+		if (this.getMusicPreference().isEmpty()) {
+			errors.put("musicPreferences", "Please select an option");
+		} else {
+			Arrays.asList(this.getMusicPreference().split(",")).forEach((e) -> {
+				if (!options.contains(e.substring(1))) {
+					errors.put("musicPreferences", "That was not an option");
+					return;
+				}
+			});
+		}
 		
 		if (this.getSex() != 'M' && this.getSex() != 'F') {
 			errors.put("sex", "Sex must be 'M' or 'F'");
@@ -264,7 +268,7 @@ public class User {
 //		System.out.println(hm.get("city"));
 //		System.out.println(hm.get("state"));
 //		System.out.println(hm.get("zip"));
-//		System.out.println(hm.get("musicPrefrences"));
+//		System.out.println(hm.get("musicPreferences"));
 //		System.out.println(hm.get("sex"));
 //		System.out.println(hm.get("password"));
 //		user.saveUser();
