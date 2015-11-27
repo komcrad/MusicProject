@@ -3,6 +3,7 @@ package com.groupProject.model;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -28,16 +29,31 @@ public class Database {
 	 * @return  if exception occurs false is returned; else true
 	 */
 	public static boolean saveToDatabase(Object obj) {
+		Session session = getNewSession();
 		try {
-			Session session = getNewSession();
 			session.beginTransaction();
 			session.save(obj);
 			session.getTransaction().commit();
-			session.close();
+		} catch (Exception e) {
+			session.getTransaction().rollback();
+			e.printStackTrace();
+			return false;
+		}
+		session.close();
+		return true;
+	}
+	
+	public static boolean updateDatabase(Object obj) {
+		Session session = getNewSession();
+		try {
+			session.beginTransaction();
+			session.update(obj);
+			session.getTransaction().commit();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
 		}
+		session.close();
 		return true;
 	}
 	
@@ -50,17 +66,16 @@ public class Database {
 			saveToDatabase(obj);
 		});
 	}
+	
+	public static List runQuery(String queryString) {
+		Session session = getNewSession();
+		Query query = session.createQuery(queryString);
+		List results = query.list();
+		session.close();
+		return results;
+	}
 	public static void kill() {
 		sessionFactory.close();
-	}
-	
-	//test
-	public static void main(String[] args) {
-		User user = new User("sam", "password!", "male");
-		saveToDatabase(user);
-		user = new User("kornad", "fsdgaga!", "female");
-		saveToDatabase(user);
-		kill();
 	}
 }
 
