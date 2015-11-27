@@ -24,7 +24,7 @@
 
 
 		<mapping class="com.groupProject.model.User" />
-		
+		<mapping class="com.groupProject.model.Song" />
 		
         <!--<property name="hibernate.jdbc.batch_size">100</property>-->
     </session-factory>
