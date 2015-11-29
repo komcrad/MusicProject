@@ -94,7 +94,7 @@ public class Song {
 	
 	@Override
 	public String toString() {
-		return songId + ", " + albumName + ", " + name + ", " + length + ", " + author + ", " + mediaType;
+		return songId + "," + albumName + "," + name + "," + length + "," + author + "," + mediaType;
 	}
 
 	public HashMap<String, String> getSongErrors() {
