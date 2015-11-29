@@ -7,7 +7,7 @@
 	<title>Login</title>
 </head>
 <body>
-	<h1>Login</h1>
+	<h1>Login to Server</h1>
 	
 	<form action="/signup" method="post">
 		Email: <input type="text" name="email" class="textInput" required> <br>
