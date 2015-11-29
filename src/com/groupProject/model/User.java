@@ -229,6 +229,20 @@ public class User {
 				+ "," + zip + "," + musicPreference + "," + apt + "," + sex + "," + password;
 	}
 	
+	
+	public boolean updateUser() {
+		if (this.getUserErrors().isEmpty()) {
+			if (Database.updateDatabase(this)) {
+				return true;
+			} else {
+				System.out.println("Save failed");
+				return false;
+			}
+		}
+		System.out.println("User had errors");
+		return false;
+	}
+	
 	/**
 	 * Validates that the user data is valid and saves the user to the database if the user is valid
 	 * @return  true if User is saved, false if user fails.
@@ -287,6 +301,11 @@ public class User {
 //			System.out.println(e.toString());
 //		});
 //		Database.kill();
+		
+//		User user = User.getUserByEmail("bobsanders2@gmail.com");
+//		user.setPassword("Iampassword!");
+//		user.updateUser();
+		
 	}
 	
 }
