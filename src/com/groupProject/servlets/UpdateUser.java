@@ -1,6 +1,7 @@
 package com.groupProject.servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 
 import javax.servlet.ServletException;
@@ -8,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.groupProject.model.Database;
 import com.groupProject.model.Functions;
@@ -24,6 +26,14 @@ public class UpdateUser extends HttpServlet {
        
     }
 
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	HttpSession session = request.getSession(true);
+    	User user = (User) session.getAttribute("user");
+		if (user == null) {
+			Functions.sendMessage("", "", "/WEB-INF/jsp/index.jsp", request, response);
+		}
+    	request.getRequestDispatcher("/WEB-INF/jsp/updateUser.jsp").forward(request, response);
+	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -41,26 +51,37 @@ public class UpdateUser extends HttpServlet {
         StringBuilder musicPreference = new StringBuilder();
 	    if (musicPreferences != null) {
 	        for(String string : musicPreferences) {
-		    	musicPreference.append(string.charAt(0));
 		    	musicPreference.append(string + ",");
 		    }
 	    }
-	    User user = new User(email, firstName, lastName, address, city, state, zip, 
-	    		musicPreference.toString(), apt, sex.charAt(0), password);
+	    HttpSession session = request.getSession(true);
+	    User user = (User) session.getAttribute("user");
+	    user.setFirstName(firstName);
+	    user.setLastName(lastName);
+	    user.setAddress(address);
+	    user.setApt(apt);
+	    user.setCity(city);
+	    user.setZip(zip);
+	    user.setSex(sex.charAt(0));
+	    user.setPassword(password);
+	    user.setEmail(email);
+	    user.setMusicPreference(musicPreference.toString());
 	    HashMap<String, String> errors = user.getUserErrors();
 	    if (errors.isEmpty()) {
 	    	
 	    	// THIS IS ONLY CHANGE FROM SIGNUP SERVLET!!!
-	    	Database.updateDatabase(user);
+	    	user.updateUser();
 	    	// ******************************************
-	    	response.sendRedirect("/");
+	    	Functions.sendMessage("Updated user", "header", 
+	    			"/WEB-INF/jsp/index.jsp", request, response);
 	    } else {
 	    	request.setAttribute("errors", errors);
 	    	request.setAttribute("sex", Functions.getCheckGroupHashMap(request, "sex"));
 	    	request.setAttribute("musicPreference", Functions.getCheckGroupHashMap(request, "musicPreference"));
-	    	request.getRequestDispatcher("/WEB-INF/jsp/signup.jsp").include(request, response);
+	    	request.getRequestDispatcher("/WEB-INF/jsp/updateUser.jsp").include(request, response);
 	    }
 	}
+	
 		
 		
 		
