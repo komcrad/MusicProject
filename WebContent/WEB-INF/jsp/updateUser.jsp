@@ -18,7 +18,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Create Account</title>
+<title>Update User Information</title>
 </head>
 <body>
 <body>
@@ -46,15 +46,20 @@
 			Email Address*: <input name="email"	type="text" value="<jsp:getProperty name="user" property="email"/>" required> <strong>${errors.email} </strong><br>
 			
 			<%
+			boolean userSex = false;
 			User u = new User();
 			char sex = u.getSex();
-				
+			String temp = Character.toString(sex);
+				if (temp.equals("M")){
+					userSex = true;}
 			%>
 			
 			<strong> ${errors.sex} </strong><br>
 			Sex*: 
-				<label>Male</label><input name="sex" type="radio" value="M" ${sex.M} required> 
-				<label>Female</label><input name="sex"	type="radio" value="F" ${sex.F}><br> 
+				<label>Male</label><input name="sex" type="radio" value="M" ${sex.M} <%if (userSex = true){ %> checked <% }%>> 
+				<label>Female</label><input name="sex"	type="radio" value="F" ${sex.F} <%if (userSex = false){ %> checked <% }%>><br> 
+				
+				
 			Music Preferences*:
 				Rock <input name="musicPreference" type="checkbox" value="Rock"	${musicPreference.Rock}> 
 				Classic <input name="musicPreference" type="checkbox" value="Classic" ${musicPreference.Classic}> 
