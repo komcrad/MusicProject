@@ -262,7 +262,12 @@ public class User {
 
 	public static User getUserByEmail(String email) {
 		String hql = "from User u where u.email = '"+email+"'";
-		User user = (User) Database.runQuery(hql).get(0);
+		User user = null;
+		try {
+			user = (User) Database.runQuery(hql).get(0);
+		} catch (java.lang.IndexOutOfBoundsException e) {
+			//user not found so we return null
+		}
 		return user;
 	}
 	
@@ -305,7 +310,13 @@ public class User {
 //		User user = User.getUserByEmail("bobsanders2@gmail.com");
 //		user.setPassword("Iampassword!");
 //		user.updateUser();
-		
+//		User user = User.getUserByEmail("jsmith@gmail.com");
+//		if (user == null) {
+//			System.out.println("HELLO");
+//		} else {
+//			System.out.println(user.getAddress());
+//		}
+//		Database.kill();
 	}
 	
 }
