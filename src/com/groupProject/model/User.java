@@ -206,7 +206,7 @@ public class User {
 			errors.put("musicPreferences", "Please select an option");
 		} else {
 			Arrays.asList(this.getMusicPreference().split(",")).forEach((e) -> {
-				if (!options.contains(e.substring(1))) {
+				if (!options.contains(e)) {
 					errors.put("musicPreferences", "That was not an option");
 					return;
 				}

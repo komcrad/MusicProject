@@ -56,7 +56,6 @@ public class Signup extends HttpServlet {
         StringBuilder musicPreference = new StringBuilder();
 	    if (musicPreferences != null) {
 	        for(String string : musicPreferences) {
-		    	musicPreference.append(string.charAt(0));
 		    	musicPreference.append(string + ",");
 		    }
 	    }
