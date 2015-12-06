@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -15,6 +16,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import com.groupProject.model.Database;
+import com.groupProject.model.Functions;
 import com.groupProject.model.User;
 
 /**
@@ -33,28 +35,17 @@ public class Login extends HttpServlet {
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	response.setContentType("text/html;charset=UTF-8");
-    	Session session = Database.getNewSession();
-    	
-    	try {
-    		Criteria criteria = session.createCriteria(User.class)
-    				.add(Restrictions.eq("email", request.getParameter("email")))
-    				.add(Restrictions.eq("password", request.getParameter("password")));
-    		
-    		@SuppressWarnings("unchecked")
-			List<User> results = criteria.list();
-    		
-    		if (results.isEmpty()) { // Log in unsuccessful.
-    			request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
+    		User user = User.getUserByEmail(request.getParameter("email"));
+    		if (user == null || !user.getPassword().equals(request.getParameter("password"))) { // Log in unsuccessful.
+    			Functions.sendMessage("Login failed", 
+    					"header", "/WEB-INF/jsp/index.jsp", request, response);
     		} else { // Log in successful.
-    			this.getServletContext().setAttribute("user", results.get(0));
+    			HttpSession session = request.getSession(true);
+    			session.setAttribute("user", user);
+    			session.setMaxInactiveInterval(60*10);
     			
     			request.getRequestDispatcher("/WEB-INF/jsp/account.jsp").forward(request, response);
     		}
-    	} catch (HibernateException e) {
-    		e.printStackTrace();
-    	} finally {
-    		session.close();
-    	}
     }
 
 	/**

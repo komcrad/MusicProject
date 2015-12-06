@@ -7,6 +7,7 @@
 	<title>Login</title>
 </head>
 <body>
+	<h3>${message.header}</h3>
 	<h1>Login to Server</h1>
 	
 	<form action="/login" method="post">
