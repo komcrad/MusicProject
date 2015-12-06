@@ -206,7 +206,7 @@ public class User {
 			errors.put("musicPreferences", "Please select an option");
 		} else {
 			Arrays.asList(this.getMusicPreference().split(",")).forEach((e) -> {
-				if (!options.contains(e.substring(1))) {
+				if (!options.contains(e)) {
 					errors.put("musicPreferences", "That was not an option");
 					return;
 				}
@@ -229,6 +229,20 @@ public class User {
 				+ "," + zip + "," + musicPreference + "," + apt + "," + sex + "," + password;
 	}
 	
+	
+	public boolean updateUser() {
+		if (this.getUserErrors().isEmpty()) {
+			if (Database.updateDatabase(this)) {
+				return true;
+			} else {
+				System.out.println("Save failed");
+				return false;
+			}
+		}
+		System.out.println("User had errors");
+		return false;
+	}
+	
 	/**
 	 * Validates that the user data is valid and saves the user to the database if the user is valid
 	 * @return  true if User is saved, false if user fails.
@@ -248,7 +262,12 @@ public class User {
 
 	public static User getUserByEmail(String email) {
 		String hql = "from User u where u.email = '"+email+"'";
-		User user = (User) Database.runQuery(hql).get(0);
+		User user = null;
+		try {
+			user = (User) Database.runQuery(hql).get(0);
+		} catch (java.lang.IndexOutOfBoundsException e) {
+			//user not found so we return null
+		}
 		return user;
 	}
 	
@@ -286,6 +305,17 @@ public class User {
 //		User.getUserSongs(user).forEach(e -> {
 //			System.out.println(e.toString());
 //		});
+//		Database.kill();
+		
+//		User user = User.getUserByEmail("bobsanders2@gmail.com");
+//		user.setPassword("Iampassword!");
+//		user.updateUser();
+//		User user = User.getUserByEmail("jsmith@gmail.com");
+//		if (user == null) {
+//			System.out.println("HELLO");
+//		} else {
+//			System.out.println(user.getAddress());
+//		}
 //		Database.kill();
 	}
 	

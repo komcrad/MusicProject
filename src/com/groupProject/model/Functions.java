@@ -25,7 +25,7 @@ public class Functions {
 		HashMap<String, String> message = new HashMap<String, String>();
 		message.put(messageName, messageToSend);
 		request.setAttribute("message", message);
-		response.sendRedirect(redirectString);
+		request.getRequestDispatcher(redirectString).forward(request, response);
 	}
 	
 	/*

@@ -1,5 +1,6 @@
 package com.groupProject.model;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -94,7 +95,7 @@ public class Song {
 	
 	@Override
 	public String toString() {
-		return songId + ", " + albumName + ", " + name + ", " + length + ", " + author + ", " + mediaType;
+		return songId + "," + albumName + "," + name + "," + length + "," + author + "," + mediaType;
 	}
 
 	public HashMap<String, String> getSongErrors() {
@@ -124,6 +125,37 @@ public class Song {
 		session.close();
 		return song;
 	}
+	public static List<Song> getSongsByX(String columnName, String valueToMatch) {
+		String hql = "from Song s where s."+columnName+" = '"+valueToMatch+"'";
+		List<Song> songs = (List<Song>) Database.runQuery(hql);
+		return songs;
+	}
+	public static List<Song> getSongsByName(String name) {
+		return getSongsByX("name", name);
+	}
+	public static List<Song> getSongsByAuthor(String authorName) {
+		return getSongsByX("author", authorName);
+	}
+	public static List<Song> getSongsByMediaType(String mediaType) {
+		return getSongsByX("mediaType", mediaType);
+	}
+	public static List<Song> getSongsByAlbumName(String albumName) {
+		return getSongsByX("albumName", albumName);
+	}
+	public static List<Song> getUniqueList(List<Song> songs) {
+		List<String> temp = new ArrayList<String>();
+		List<Song> result = new ArrayList<Song>(songs);
+		songs.forEach(s -> {
+			String idkWhatToNameThis = s.toString().substring(s.toString().indexOf(",")+1);
+			if (!temp.contains(idkWhatToNameThis)) {
+				temp.add(idkWhatToNameThis);
+			} else {
+				result.remove(s);
+			}
+		});
+		return result;
+	}
+	
 	
 	public boolean saveSong() {
 		if (this.getSongErrors().isEmpty()) {
@@ -139,6 +171,9 @@ public class Song {
 	}
 	
 	public static void main(String[] args) {
+		Song.getUniqueList(Song.getSongsByAlbumName("Dangerous")).forEach(s -> {
+			System.out.println(s);
+		});
 	}
 	
 }
