@@ -9,7 +9,7 @@
 <body>
 	<h1>Login to Server</h1>
 	
-	<form action="/signup" method="post">
+	<form action="/login" method="post">
 		Email: <input type="text" name="email" class="textInput" required> <br>
 		Password: <input type="password" name="password" class="textInput" required> <br>
 		<input type="submit" value="login" name="login"><br>
