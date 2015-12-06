@@ -63,8 +63,13 @@ public class Signup extends HttpServlet {
 	    		musicPreference.toString(), apt, sex.charAt(0), password);
 	    HashMap<String, String> errors = user.getUserErrors();
 	    if (errors.isEmpty()) {
-	    	user.saveUser();
-	    	response.sendRedirect("/");
+	    	if (User.getUserByEmail(user.getEmail()) == null) {
+		    	user.saveUser();
+		    	response.sendRedirect("/");
+	    	} else {
+	    		Functions.sendMessage("That email address already exists", 
+	    				"header", "/WEB-INF/jsp/signup.jsp", request, response);
+	    	}
 	    } else {
 	    	request.setAttribute("errors", errors);
 	    	request.setAttribute("sex", Functions.getCheckGroupHashMap(request, "sex"));
