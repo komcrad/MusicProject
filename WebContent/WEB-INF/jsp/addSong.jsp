@@ -7,7 +7,7 @@
 <title>Add Song</title>
 </head>
 <body>
-	<form action="AddSong" method="post">
+	<form action="AddsSong" method="post">
 		Song Name*: <input name="songName" type="text" value="${param.songName}" required><strong> ${errors.songName} </strong><br>
 		Album Name*: <input name="albumName" type="text" value="${param.albumName}" required><strong> ${errors.albumName} </strong><br>
 		Length*: <input name="length" type="text" value="${param.length}" required><strong> ${errors.length} </strong><br>
