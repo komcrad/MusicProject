@@ -25,7 +25,7 @@
 
 
 	<h1>Update User:</h1>
-	<form action="updateUser" method="post">
+	<form action="UpdateUser" method="post">
 			
 			First Name*: <input name="firstName" type="text" value="<jsp:getProperty name="user" property="firstName"/>" required><strong>${errors.firstName} </strong><br>
 		 
