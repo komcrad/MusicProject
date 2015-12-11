@@ -35,7 +35,7 @@
             </div>
             <div id="user_library">
                 <table id="user_songs">
-                    <caption>${caption}My Library</caption>
+                    <caption>${caption}</caption>
                     <tr>
                         <th>Song Name</th>
                         <th>Album Name</th>
