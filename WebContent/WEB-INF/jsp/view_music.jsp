@@ -40,7 +40,7 @@
                         <th>Length</th>
                         <th>Songwriter</th>
                         <th>Media Type</th>
-                        <th>Remove</th>
+                        <th>Delete Song</th>
                     </tr>
                     <c:forEach var="song" items="${songs}">
                         <tr>
