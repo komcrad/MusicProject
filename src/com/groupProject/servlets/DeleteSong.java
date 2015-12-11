@@ -29,10 +29,8 @@ public class DeleteSong extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-    	Song songToDelete = new Song();
-    	songToDelete.deleteSongById((int) session.getAttribute("song_ID"));
-    	request.getRequestDispatcher("/WEB-INF/jsp/userLibrary.jsp").include(request, response);
+    	Song.deleteSongById(Integer.parseInt(request.getParameter("song_id")));
+    	request.getRequestDispatcher("/UserLibrary").forward(request, response);
 	}
 
 }
