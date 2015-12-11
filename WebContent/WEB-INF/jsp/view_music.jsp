@@ -19,7 +19,7 @@
             <h2>${user.firstName} ${user.lastName}'s Music Collection</h2>
             <div id="search_form">
                 <h3>Search Music</h3>
-                <form name="search_music" id="search_music" action="${pageContext.request.contextPath}/SearchMusic" method="POST">
+                <form name="search_music" id="search_music" action="${pageContext.request.contextPath}/com/groupProject/servlets/SearchMusic" method="POST">
                     <select name="search_criteria">
                         <option value="Song Name">Song Name</option>
                         <option value="Album Name">Album Name</option>
