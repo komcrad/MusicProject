@@ -14,10 +14,10 @@
                    <input id="logout" type="submit" name="logout" value="Logout">
             </form>
             <h1>Music Library</h1>
-            <h2>${message.message}</h2>
         </header>
         <div id="main_content" class="cf">
             <h2>${user.firstName} ${user.lastName}'s Music Collection</h2>
+            <h2>${message.message}</h2>
             <div id="search_form">
                 <h3>Search Music</h3>
                 <form name="search_music" id="search_music" action="/SearchMusic" method="POST">
@@ -56,7 +56,7 @@
                             <td>
                                 <form onsubmit="return confirm('Are you sure you want to delete this song?');" name="delete_song" id="delete_song" name="delete" action="/DeleteSong" method="POST">
                                     <input type="hidden" name="song_id" value="${song.songId}">
-                                    <input type="submit" id="delete_song" name="delete_song" value="Remove">Delete
+                                    <input type="submit" id="delete_song" name="delete_song" value="Remove">
                                 </form>
                             </td>
                         </tr>
