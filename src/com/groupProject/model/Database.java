@@ -43,6 +43,26 @@ public class Database {
 		return true;
 	}
 	
+	/**
+	 * Deletes an object to the database
+	 * @param obj  The object to be removed to the database
+	 * @return  if exception occurs false is returned; else true
+	 */
+	public static boolean deleteFromDatabase(Object obj) {
+		Session session = getNewSession();
+		try {
+			session.beginTransaction();
+			session.delete(obj);
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			session.getTransaction().rollback();
+			e.printStackTrace();
+			return false;
+		}
+		session.close();
+		return true;
+	}
+	
 	public static boolean updateDatabase(Object obj) {
 		Session session = getNewSession();
 		try {
