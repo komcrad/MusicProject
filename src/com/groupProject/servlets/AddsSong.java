@@ -12,7 +12,7 @@ import com.groupProject.model.*;
 /**
  * Servlet implementation class index
  */
-@WebServlet(name = "index", description = "Main entry point.", urlPatterns = { "/" })
+@WebServlet(name = "addSong", description = "Main entry point.", urlPatterns = { "/addSong" })
 public class AddsSong extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
