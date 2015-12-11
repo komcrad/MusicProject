@@ -59,17 +59,41 @@
 				<label>Male</label><input name="sex" type="radio" value="M" ${sex.M} <%if (userSex = true){ %> checked <% }%>> 
 				<label>Female</label><input name="sex"	type="radio" value="F" ${sex.F} <%if (userSex = false){ %> checked <% }%>><br> 
 				
-				
+<% 
+	String prefs = u.getMusicPreference();
+	String [] myList = prefs.split(",");
+		for (String i : myList){
+%>			
 			Music Preferences*:
-				Rock <input name="musicPreference" type="checkbox" value="Rock"	${musicPreference.Rock}> 
-				Classic <input name="musicPreference" type="checkbox" value="Classic" ${musicPreference.Classic}> 
-				Jazz <input	name="musicPreference" type="checkbox" value="Jazz"	${musicPreference.Jazz}> 
-				Country <input name="musicPreference" type="checkbox" value="Country" ${musicPreference.Country}> 
-				Pop <input name="musicPreference" type="checkbox" value="Pop" ${musicPreference.Pop}>
-				Alternative <input name="musicPreference" type="checkbox" value="Alternative" ${musicPreference.Alternative}> 
-				Rap <input	name="musicPreference" type="checkbox" value="Rap"	${musicPreference.Rap}>
-				<strong> ${errors.musicPreferences} </strong><br> 
-				<input type="submit" value="Update Account" id='submit'>
+	<%		if (i.equals("Rock")) %>
+				Rock <input name="musicPreference" type="checkbox" value="Rock"	${musicPreference.Rock}<% { %> checked <%} %>> 
+				
+	<% 		if (i.equals("Classic")) %>			
+				Classic <input name="musicPreference" type="checkbox" value="Classic" ${musicPreference.Classic}<% { %> checked <%} %>> 
+				
+	<% 		if (i.equals("Jazz"))	%>
+				Jazz <input	name="musicPreference" type="checkbox" value="Jazz"	${musicPreference.Jazz}<% { %> checked <%} %>>
+				
+	<%		if (i.equals("Country"))  %>	 
+				Country <input name="musicPreference" type="checkbox" value="Country" ${musicPreference.Country}<% { %> checked <%} %>>
+
+	<%		if (i.equals("Pop")) %>
+				Pop <input name="musicPreference" type="checkbox" value="Pop" ${musicPreference.Pop}<% { %> checked <%} %>>
+				
+	<%		if (i.equals("Alternative")) %>	
+				Alternative <input name="musicPreference" type="checkbox" value="Alternative" ${musicPreference.Alternative}<% { %> checked <%} %>> 
+				
+	<%		if (i.equals("Rap")) %>	
+				Rap <input	name="musicPreference" type="checkbox" value="Rap"	${musicPreference.Rap}<% { %> checked <%} %>>
+				
+ 				<strong> ${errors.musicPreferences} </strong><br> 
+ 				<input type="submit" value="Update Account" id='submit'>
+				
+	<% }%>			
+ 	</form>
+ </body>
+ 
+
 	</form>
 </body>
 
