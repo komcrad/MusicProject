@@ -25,12 +25,8 @@ public class SearchMusic extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        if(request.getParameter("search_submit") != null) {
-            searchMusic(request, response);
-        }
-        else {
-            request.getServletContext().getRequestDispatcher("/com/groupProject/servlets/UserLibrary").forward(request, response);
-        }
+        searchMusic(request, response);
+        
     }
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
@@ -47,13 +43,13 @@ public class SearchMusic extends HttpServlet {
     
     private void searchMusic(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
-        
         String url = "/WEB-INF/jsp/view_music.jsp";
         String msg = "";
         int count = 0;
-        
+
+        System.out.println("SearchMusic function");
         List<Song> songs = searchSongs(request, response);
-        
+
         if(songs.isEmpty()) {
             msg = "No results found";
         }

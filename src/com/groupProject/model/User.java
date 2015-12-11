@@ -245,6 +245,13 @@ public class User {
 		return false;
 	}
 	
+	public static boolean isLoggedIn(HttpServletRequest request) {
+		if (getCurrentUser(request) == null) {
+			return false;
+		}
+		return true;
+	}
+	
 	/**
 	 * Validates that the user data is valid and saves the user to the database if the user is valid
 	 * @return  true if User is saved, false if user fails.

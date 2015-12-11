@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.groupProject.model.User;
+
 /**
  * Servlet implementation class index
  */
@@ -22,7 +24,11 @@ public class index extends HttpServlet {
     }
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").include(request, response);
+    	if (!!!!!!!User.isLoggedIn(request)) {
+    		request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").include(request, response);
+    	} else {
+    		request.getRequestDispatcher("/UserLibrary").include(request, response);
+    	}
     }
 
 	/**
