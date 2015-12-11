@@ -71,8 +71,8 @@ public class SearchMusic extends HttpServlet {
         User user = (User) session.getAttribute("user");
 
         List<Song> songs = User.getUserSongs(user);
-        String searchCriteria = request.getParameter("search_criteria");
         List<Song> results = new ArrayList<Song>();
+        String searchCriteria = request.getParameter("search_criteria");
         String search_text = request.getParameter("search_text");
         
         switch(searchCriteria) {
