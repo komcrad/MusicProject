@@ -6,37 +6,43 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import com.groupProject.model.*;
 
 /**
  * Servlet implementation class index
  */
 @WebServlet(name = "index", description = "Main entry point.", urlPatterns = { "/" })
-public class index extends HttpServlet {
+public class AddsSong extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public index() {
+    public AddsSong() {
         super();
     }
-    
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").include(request, response);
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		processRequest(request, response);
-	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		processRequest(request, response);
+		HttpSession session = request.getSession();
+    	Song songToAdd = new Song();
+    	User user = new User();
+    	user.getCurrentUser(request);
+    	songToAdd.setAlbumName(request.getAttribute("albumName").toString());
+    	songToAdd.setName(request.getAttribute("name").toString());
+    	songToAdd.setLength(request.getAttribute("length").toString());
+    	songToAdd.setAuthor(request.getAttribute("author").toString());
+    	songToAdd.setMediaType(request.getAttribute("mediaType").toString());
+    	songToAdd.setUser(user);
+    	if (!songToAdd.saveSong()){
+    		// handle error
+    		Functions.sendMessage("Song did not save to Database correctly","DB Error - Song","/WEB-INF/jsp/userLibrary.jsp",request,response);
+    	} else {
+    		songToAdd.saveSong();
+    	}
+    	request.getRequestDispatcher("/WEB-INF/jsp/userLibrary.jsp").include(request, response);
 	}
 	
 	/**
