@@ -17,9 +17,9 @@
 
         <property name="dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
         <!--<property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>-->
-        <property name="connection.url">jdbc:mysql://127.0.0.1:3306/music</property>
+        <property name="connection.url">jdbc:mysql://konradtallman.com:3306/music</property>
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="connection.username">root</property>
+        <property name="connection.username">jspuser</property>
         <property name="connection.password">2mgpwutm</property>
 
 

@@ -6,43 +6,49 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import com.groupProject.model.*;
 
 /**
  * Servlet implementation class index
  */
-@WebServlet(name = "addSong", description = "Main entry point.", urlPatterns = { "/addSong" })
-public class AddsSong extends HttpServlet {
+@WebServlet("/AddSong")
+public class AddSong extends HttpServlet {
+
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddsSong() {
+    public AddSong() {
         super();
     }
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
     	Song songToAdd = new Song();
-    	User user = new User();
-    	user.getCurrentUser(request);
-    	songToAdd.setAlbumName(request.getAttribute("albumName").toString());
-    	songToAdd.setName(request.getAttribute("name").toString());
-    	songToAdd.setLength(request.getAttribute("length").toString());
-    	songToAdd.setAuthor(request.getAttribute("author").toString());
-    	songToAdd.setMediaType(request.getAttribute("mediaType").toString());
+    	User user = User.getCurrentUser(request);
+    	songToAdd.setAlbumName(request.getParameter("albumName").toString());
+    	songToAdd.setName(request.getParameter("songName").toString());
+    	songToAdd.setLength(request.getParameter("length").toString());
+    	songToAdd.setAuthor(request.getParameter("author").toString());
+    	songToAdd.setMediaType(request.getParameter("mediaType").toString());
     	songToAdd.setUser(user);
     	if (!songToAdd.saveSong()){
     		// handle error
-    		Functions.sendMessage("Song did not save to Database correctly","DB Error - Song","/WEB-INF/jsp/userLibrary.jsp",request,response);
+    		request.setAttribute("errors", songToAdd.getSongErrors());
+    		request.getRequestDispatcher("/WEB-INF/jsp/addSong.jsp").forward(request, response);
     	} else {
-    		songToAdd.saveSong();
+    		response.sendRedirect("/UserLibrary");
     	}
-    	request.getRequestDispatcher("/WEB-INF/jsp/userLibrary.jsp").include(request, response);
+	}
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if (User.isLoggedIn(request)) {
+			request.getRequestDispatcher("/WEB-INF/jsp/addSong.jsp").include(request, response);
+		} else {
+			request.getRequestDispatcher("/").forward(request, response);
+		}
 	}
 	
 	/**

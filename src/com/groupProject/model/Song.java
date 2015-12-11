@@ -137,7 +137,7 @@ public class Song {
 		return song;
 	}
 	public static List<Song> getSongsByX(String columnName, String valueToMatch) {
-		String hql = "from Song s where s."+columnName+" = '"+valueToMatch+"'";
+		String hql = "from Song s where s."+columnName+" like '%"+valueToMatch+"%'";
 		List<Song> songs = (List<Song>) Database.runQuery(hql);
 		return songs;
 	}
@@ -185,9 +185,7 @@ public class Song {
 	}
 	
 	public static void main(String[] args) {
-		Song song = new Song("Listen", "Dangerous", "03:23", "David", "Computer", User.getUserByEmail("konradt95@gmail.com"));
-		song.saveSong();
-		Database.kill();
+		
 	}
 	
 }

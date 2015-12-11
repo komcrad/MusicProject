@@ -10,10 +10,11 @@
     </head>
     <body>
         <header>
-            <form id="logout" action="${pageContext.request.contextPath}/com/groupProject/servlets/Logout" method="POST">
+            <form id="logout" action="Logout" method="POST">
                    <input id="logout" type="submit" name="logout" value="Logout">
             </form>
             <h1>Music Library</h1>
+            <h2>${message.message}</h2>
         </header>
         <div id="main_content" class="cf">
             <h2>${user.firstName} ${user.lastName}'s Music Collection</h2>
@@ -62,7 +63,7 @@
                     </c:forEach>
                 </table>
             </div>
-            <a href="${pageContext.request.contextPath}/WEB-INF/jsp/addSong.jsp">Add Song</a>
+            <a href="/AddSong">Add Song</a> <a href="/UpdateUser">Update User Info</a>
         </div>
     </body>
 </html>

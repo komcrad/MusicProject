@@ -21,21 +21,25 @@ public class UserLibrary extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        
-        String url = "/WEB-INF/jsp/view_music.jsp";
-        String caption = "My Library";
-
-        HttpSession session = request.getSession(false);
-        User user = (User) session.getAttribute("user");
-        
-
-        List<Song> songs = User.getUserSongs(user);
-        
-        session.setAttribute("songs", songs);
-        session.setAttribute("caption", caption);
-        
-        request.getServletContext().getRequestDispatcher(url).forward(request, response);
+    	if (User.isLoggedIn(request)) {
+	        response.setContentType("text/html;charset=UTF-8");
+	        
+	        String url = "/WEB-INF/jsp/view_music.jsp";
+	        String caption = "My Library";
+	
+	        HttpSession session = request.getSession(false);
+	        User user = (User) session.getAttribute("user");
+	        
+	
+	        List<Song> songs = User.getUserSongs(user);
+	        
+	        session.setAttribute("songs", songs);
+	        session.setAttribute("caption", caption);
+	        
+	        request.getServletContext().getRequestDispatcher(url).forward(request, response);
+    	} else {
+    		response.sendRedirect("/");
+    	}
     }
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
