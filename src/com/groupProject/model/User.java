@@ -13,6 +13,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.hibernate.Session;
 
@@ -269,6 +271,12 @@ public class User {
 			//user not found so we return null
 		}
 		return user;
+	}
+	
+	public static User getCurrentUser(HttpServletRequest request) {
+		HttpSession session = request.getSession(true);
+    	User user = (User) session.getAttribute("user");
+    	return user;
 	}
 	
 	@SuppressWarnings("unchecked")

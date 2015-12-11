@@ -47,21 +47,21 @@
 			
 			<%
 			boolean userSex = false;
-			User u = new User();
+			User u = User.getCurrentUser(request);
 			char sex = u.getSex();
 			String temp = Character.toString(sex);
-				if (temp.equals("M")){
+				if (temp.equals("M")) {
 					userSex = true;}
 			%>
 			
 			<strong> ${errors.sex} </strong><br>
 			Sex*: 
-				<label>Male</label><input name="sex" type="radio" value="M" ${sex.M} <%if (userSex = true){ %> checked <% }%>> 
-				<label>Female</label><input name="sex"	type="radio" value="F" ${sex.F} <%if (userSex = false){ %> checked <% }%>><br> 
+				<label>Male</label><input name="sex" type="radio" value="M" ${sex.M} <%if (userSex == true){ %> checked <% }%>> 
+				<label>Female</label><input name="sex"	type="radio" value="F" ${sex.F} <%if (userSex == false){ %> checked <% }%>><br> 
 				
 <% 
 	String prefs = u.getMusicPreference();
-	String [] myList = prefs.split(",");
+	String[] myList = prefs.split(",");
 		for (String i : myList){
 %>			
 			Music Preferences*:
