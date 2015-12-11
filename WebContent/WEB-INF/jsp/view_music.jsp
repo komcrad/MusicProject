@@ -19,7 +19,7 @@
             <h2>${user.firstName} ${user.lastName}'s Music Collection</h2>
             <div id="search_form">
                 <h3>Search Music</h3>
-                <form name="search_music" id="search_music" action="${pageContext.request.contextPath}/com/groupProject/servlets/SearchMusic" method="POST">
+                <form name="search_music" id="search_music" action="/SearchMusic" method="POST">
                     <select name="search_criteria">
                         <option value="Song Name">Song Name</option>
                         <option value="Album Name">Album Name</option>
@@ -28,7 +28,9 @@
                     </select>
                     <input name="search_text" type="text"><br />
                     <input name="search_submit" id="search_music" class="search" type="submit" value="Search">
-                    <input name="cancel_search" id="search_search" type="submit" class="cancel" value="Cancel">
+                </form>
+                <form action="/UserLibrary" method="POST" name="cancel_search" id="cancel_search">
+                	<input type="submit" name="cancel_search" value="Cancel" id="cancel_search">
                 </form>
             </div>
             <div id="user_library">
@@ -50,7 +52,7 @@
                             <td>${song.author}</td>
                             <td>${song.mediaType}</td>
                             <td>
-                                <form onsubmit="return confirm('Are you sure you want to delete this song?');" name="delete_song" id="delete_song" name="delete" action="${pageContext.request.contextPath}/com/groupProject/servlets/DeleteSong" method="POST">
+                                <form onsubmit="return confirm('Are you sure you want to delete this song?');" name="delete_song" id="delete_song" name="delete" action="/DeleteSong" method="POST">
                                     <input type="hidden" name="song_id" value="${song.songId}">
                                     <input type="submit" id="delete_song" name="delete_song" value="Remove">Delete
                                 </form>
