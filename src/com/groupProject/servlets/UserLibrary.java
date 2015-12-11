@@ -31,14 +31,9 @@ public class UserLibrary extends HttpServlet {
         
 
         List<Song> songs = User.getUserSongs(user);
-        songs.forEach(e -> {
-        	System.out.println(e.toString());
-        });
         
-        if(!songs.isEmpty()) {
-            session.setAttribute("songs", songs);
-            session.setAttribute("caption", caption);
-        }
+        session.setAttribute("songs", songs);
+        session.setAttribute("caption", caption);
         
         request.getServletContext().getRequestDispatcher(url).forward(request, response);
     }
