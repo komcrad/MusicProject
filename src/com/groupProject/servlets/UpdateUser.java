@@ -72,8 +72,8 @@ public class UpdateUser extends HttpServlet {
 	    	// THIS IS ONLY CHANGE FROM SIGNUP SERVLET!!!
 	    	user.updateUser();
 	    	// ******************************************
-	    	Functions.sendMessage("Updated user", "header", 
-	    			"/WEB-INF/jsp/index.jsp", request, response);
+	    	Functions.sendMessage("Updated user", "message", 
+	    			"/UserLibrary", request, response);
 	    } else {
 	    	request.setAttribute("errors", errors);
 	    	request.setAttribute("sex", Functions.getCheckGroupHashMap(request, "sex"));
