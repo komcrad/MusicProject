@@ -29,7 +29,7 @@ public class SearchMusic extends HttpServlet {
             searchMusic(request, response);
         }
         else {
-            request.getServletContext().getRequestDispatcher("/UserLibrary").forward(request, response);
+            request.getServletContext().getRequestDispatcher("/com/groupProject/servlets/UserLibrary").forward(request, response);
         }
     }
     
