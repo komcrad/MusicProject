@@ -142,6 +142,9 @@ public class Song {
 	public static List<Song> getSongsByAlbumName(String albumName) {
 		return getSongsByX("albumName", albumName);
 	}
+	public static boolean deleteSongById(int id) {
+		return Database.deleteFromDatabase(getSongById(id));
+	}
 	public static List<Song> getUniqueList(List<Song> songs) {
 		List<String> temp = new ArrayList<String>();
 		List<Song> result = new ArrayList<Song>(songs);
@@ -171,9 +174,7 @@ public class Song {
 	}
 	
 	public static void main(String[] args) {
-		Song.getUniqueList(Song.getSongsByAlbumName("Dangerous")).forEach(s -> {
-			System.out.println(s);
-		});
+		Song.deleteSongById(53);
 	}
 	
 }
