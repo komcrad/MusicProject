@@ -10,7 +10,7 @@
     </head>
     <body>
         <header>
-            <form id="logout" action="${pageContext.request.contextPath}/com/groupProject/servlets/Logout" method="POST">
+            <form id="logout" action="${pageContext.request.contextPath}/Logout" method="POST">
                    <input id="logout" type="submit" name="logout" value="Logout">
             </form>
             <h1>Music Library</h1>
