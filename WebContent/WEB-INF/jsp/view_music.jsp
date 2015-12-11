@@ -16,7 +16,6 @@
         </header>
         <div id="main_content" class="cf">
             <h2>${user.firstName} ${user.lastName}'s Music Collection</h2>
-            </div>
             <div id="search_form">
                 <h3>Search Music</h3>
                 <form name="search_music" id="search_music" action="${pageContext.request.contextPath}/SearchMusic" method="POST">
@@ -40,18 +39,25 @@
                         <th>Length</th>
                         <th>Songwriter</th>
                         <th>Media Type</th>
+                        <th>Remove</th>
                     </tr>
                     <c:forEach var="song" items="${songs}">
                         <tr>
                             <td>${song.name}</td>
-                            <td>${song.album}</td>
+                            <td>${song.albumName}</td>
                             <td>${song.length}</td>
                             <td>${song.author}</td>
-                            <td>$${song.media}</td>
+                            <td>${song.mediaType}</td>
+                            <td>
+                                <form name="${song.songId}" id="delete_song" name="delete" action="${pageContext.request.contextPath}/DeleteSong" method="POST">
+                                    <input type="submit" id="delete_song" name="${song.songId}" value="Delete Song">Delete
+                                </form>
+                            </td>
                         </tr>
                     </c:forEach>
                 </table>
             </div>
+            <a href="${pageContext.request.contextPath}/addSong.jsp">Add Song</a>
         </div>
     </body>
 </html>
