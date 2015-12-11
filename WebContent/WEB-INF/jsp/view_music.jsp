@@ -58,7 +58,7 @@
                     </c:forEach>
                 </table>
             </div>
-            <a href="${pageContext.request.contextPath}/addSong.jsp">Add Song</a>
+            <a href="${pageContext.request.contextPath}/WEB-INF/jsp/addSong.jsp">Add Song</a>
         </div>
     </body>
 </html>
