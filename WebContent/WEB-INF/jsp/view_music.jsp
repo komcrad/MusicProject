@@ -10,7 +10,7 @@
     </head>
     <body>
         <header>
-            <form id="logout" action="${pageContext.request.contextPath}/Logout" method="POST">
+            <form id="logout" action="${pageContext.request.contextPath}/com/groupProject/servlets/Logout" method="POST">
                    <input id="logout" type="submit" name="logout" value="Logout">
             </form>
             <h1>Music Library</h1>
@@ -50,7 +50,7 @@
                             <td>${song.author}</td>
                             <td>${song.mediaType}</td>
                             <td>
-                                <form name="${song.songId}" id="delete_song" name="delete" action="${pageContext.request.contextPath}/DeleteSong" method="POST">
+                                <form name="${song.songId}" id="delete_song" name="delete" action="${pageContext.request.contextPath}/com/groupProject/servlets/DeleteSong" method="POST">
                                     <input type="submit" id="delete_song" name="${song.songId}" value="Delete Song">Delete
                                 </form>
                             </td>
