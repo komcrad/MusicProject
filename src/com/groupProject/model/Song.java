@@ -32,6 +32,9 @@ public class Song {
 	public Song() {}
 
 	
+	
+
+
 	public Song(String albumName, String name, String length, String author, String mediaType, User user) {
 		super();
 		this.albumName = albumName;
@@ -42,7 +45,15 @@ public class Song {
 		this.user = user;
 	}
 
+	public int getSongId() {
+		return songId;
+	}
 
+
+	public void setSongId(int songId) {
+		this.songId = songId;
+	}
+	
 	public User getUser() {
 		return user;
 	}
@@ -174,7 +185,9 @@ public class Song {
 	}
 	
 	public static void main(String[] args) {
-		Song.deleteSongById(53);
+		Song song = new Song("Listen", "Dangerous", "03:23", "David", "Computer", User.getUserByEmail("konradt95@gmail.com"));
+		song.saveSong();
+		Database.kill();
 	}
 	
 }
