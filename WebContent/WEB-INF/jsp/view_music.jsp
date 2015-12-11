@@ -50,8 +50,9 @@
                             <td>${song.author}</td>
                             <td>${song.mediaType}</td>
                             <td>
-                                <form name="${song.songId}" id="delete_song" name="delete" action="${pageContext.request.contextPath}/com/groupProject/servlets/DeleteSong" method="POST">
-                                    <input type="submit" id="delete_song" name="${song.songId}" value="Delete Song">Delete
+                                <form name="delete_song" id="delete_song" name="delete" action="${pageContext.request.contextPath}/com/groupProject/servlets/DeleteSong" method="POST">
+                                    <input type="hidden" name="song_id" value="${song.songId}">
+                                    <input type="submit" id="delete_song" name="delete_song" value="Delete Song">Delete
                                 </form>
                             </td>
                         </tr>
