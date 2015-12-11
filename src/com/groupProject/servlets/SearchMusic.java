@@ -25,12 +25,7 @@ public class SearchMusic extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        if(request.getParameter("search_submit") != null) {
-            searchMusic(request, response);
-        }
-        else {
-            request.getServletContext().getRequestDispatcher("/com/groupProject/servlets/UserLibrary").forward(request, response);
-        }
+        searchMusic(request, response);
     }
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
