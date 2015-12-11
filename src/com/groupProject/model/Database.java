@@ -37,6 +37,7 @@ public class Database {
 		} catch (Exception e) {
 			session.getTransaction().rollback();
 			e.printStackTrace();
+			session.close();
 			return false;
 		}
 		session.close();
@@ -57,6 +58,7 @@ public class Database {
 		} catch (Exception e) {
 			session.getTransaction().rollback();
 			e.printStackTrace();
+			session.close();
 			return false;
 		}
 		session.close();
@@ -71,6 +73,7 @@ public class Database {
 			session.getTransaction().commit();
 		} catch (Exception e) {
 			e.printStackTrace();
+			session.close();
 			return false;
 		}
 		session.close();
