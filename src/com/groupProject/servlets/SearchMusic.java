@@ -67,26 +67,23 @@ public class SearchMusic extends HttpServlet {
     }
     
     private List<Song> searchSongs(HttpServletRequest request, HttpServletResponse response) {
-        HttpSession session = request.getSession(false);
-        User user = (User) session.getAttribute("user");
 
-        List<Song> songs = User.getUserSongs(user);
         List<Song> results = new ArrayList<Song>();
         String searchCriteria = request.getParameter("search_criteria");
         String search_text = request.getParameter("search_text");
         
         switch(searchCriteria) {
             case "Song Name":
-                results = this.getSongsByName(songs, search_text);
+                results = Song.getSongsByName(search_text);
                 break;
             case "Album Name":
-                results = this.getSongsByAlbumName(songs, search_text;
+                results = Song.getSongsByAlbumName(search_text);
                 break;
             case "Songwriter":
-                results = this.getSongsByAuthor(songs, search_text;
+                results = Song.getSongsByAuthor(search_text);
                 break;
             case "Media Type":
-                results = this.getSongsByMediaType(songs, search_text);
+                results = Song.getSongsByMediaType(search_text);
                 break;
         }
         
@@ -99,61 +96,6 @@ public class SearchMusic extends HttpServlet {
         HttpSession session = request.getSession();
         
         session.setAttribute("songs", songs);
-    }
-    
-    private List<Song> getSongsByName(List<Song> songs, String search_text ) {
-        
-        List<Song> results = new ArrayList<Song>();
-        
-        for(Song song: songs) {
-            if(song.getName().contains(search_text) {
-                results.add(song);
-            }
-        }
-        
-        return results;
-    }
-    
-    
-    private List<Song> getSongsByAlbumName(List<Song> songs, String search_text ) {
-        
-        List<Song> results = new ArrayList<Song>();
-        
-        for(Song song: songs) {
-            if(song.getAlbumName().contains(search_text) {
-                results.add(song);
-            }
-        }
-        
-        return results;
-    }
-    
-    
-    private List<Song> getSongsByAuthor(List<Song> songs, String search_text ) {
-        
-        List<Song> results = new ArrayList<Song>();
-        
-        for(Song song: songs) {
-            if(song.getAuthor().contains(search_text) {
-                results.add(song);
-            }
-        }
-        
-        return results;
-    }
-    
-    
-    private List<Song> getSongsByMediaType(List<Song> songs, String search_text ) {
-        
-        List<Song> results = new ArrayList<Song>();
-        
-        for(Song song: songs) {
-            if(song.getMediaType().contains(search_text) {
-                results.add(song);
-            }
-        }
-        
-        return results;
     }
     
     
