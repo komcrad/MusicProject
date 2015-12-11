@@ -67,26 +67,30 @@ public class SearchMusic extends HttpServlet {
     }
     
     private List<Song> searchSongs(HttpServletRequest request, HttpServletResponse response) {
-        
+        HttpSession session = request.getSession(false);
+        User user = (User) session.getAttribute("user");
+
+        List<Song> songs = User.getUserSongs(user);
         String searchCriteria = request.getParameter("search_criteria");
-        List<Song> songs = new ArrayList<Song>();
+        List<Song> results = new ArrayList<Song>();
+        String search_text = request.getParameter("search_text");
         
         switch(searchCriteria) {
             case "Song Name":
-                songs = Song.getSongsByName(request.getParameter("search_text"));
+                results = this.getSongsByName(songs, search_text);
                 break;
             case "Album Name":
-                songs = Song.getSongsByAlbumName(request.getParameter("search_text"));
+                results = this.getSongsByAlbumName(songs, search_text;
                 break;
             case "Songwriter":
-                songs = Song.getSongsByAuthor(request.getParameter("search_text"));
+                results = this.getSongsByAuthor(songs, search_text;
                 break;
             case "Media Type":
-                songs = Song.getSongsByMediaType(request.getParameter("search_text"));
+                results = this.getSongsByMediaType(songs, search_text);
                 break;
         }
         
-        return songs;
+        return results;
     }
     
     private void setSession(HttpServletRequest request, HttpServletResponse response, List<Song> songs) 
@@ -96,6 +100,62 @@ public class SearchMusic extends HttpServlet {
         
         session.setAttribute("songs", songs);
     }
+    
+    private List<Song> getSongsByName(List<Song> songs, String search_text ) {
+        
+        List<Song> results = new ArrayList<Song>();
+        
+        for(Song song: songs) {
+            if(song.getName().contains(search_text) {
+                results.add(song);
+            }
+        }
+        
+        return results;
+    }
+    
+    
+    private List<Song> getSongsByAlbumName(List<Song> songs, String search_text ) {
+        
+        List<Song> results = new ArrayList<Song>();
+        
+        for(Song song: songs) {
+            if(song.getAlbumName().contains(search_text) {
+                results.add(song);
+            }
+        }
+        
+        return results;
+    }
+    
+    
+    private List<Song> getSongsByAuthor(List<Song> songs, String search_text ) {
+        
+        List<Song> results = new ArrayList<Song>();
+        
+        for(Song song: songs) {
+            if(song.getAuthor().contains(search_text) {
+                results.add(song);
+            }
+        }
+        
+        return results;
+    }
+    
+    
+    private List<Song> getSongsByMediaType(List<Song> songs, String search_text ) {
+        
+        List<Song> results = new ArrayList<Song>();
+        
+        for(Song song: songs) {
+            if(song.getMediaType().contains(search_text) {
+                results.add(song);
+            }
+        }
+        
+        return results;
+    }
+    
     
     private void forward(HttpServletRequest request, HttpServletResponse response, String url, String msg) 
             throws ServletException, IOException {
