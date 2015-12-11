@@ -50,7 +50,7 @@
                             <td>${song.author}</td>
                             <td>${song.mediaType}</td>
                             <td>
-                                <form name="delete_song" id="delete_song" name="delete" action="${pageContext.request.contextPath}/com/groupProject/servlets/DeleteSong" method="POST">
+                                <form onsubmit="return confirm('Are you sure you want to delete this song?');" name="delete_song" id="delete_song" name="delete" action="${pageContext.request.contextPath}/com/groupProject/servlets/DeleteSong" method="POST">
                                     <input type="hidden" name="song_id" value="${song.songId}">
                                     <input type="submit" id="delete_song" name="delete_song" value="Remove">Delete
                                 </form>
