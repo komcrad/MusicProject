@@ -5,12 +5,12 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/view_music.css" type="text/css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/WEB-INF/css/view_music.css" type="text/css">
         <title>My Music</title>
     </head>
     <body>
         <header>
-            <form id="logout" action="${pageContext.request.contextPath}/Logout" method="POST">
+            <form id="logout" action="/Logout" method="POST">
                    <input id="logout" type="submit" name="logout" value="Logout">
             </form>
             <h1>Music Library</h1>
