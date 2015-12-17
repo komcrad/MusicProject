@@ -33,6 +33,7 @@
 		Rap <input name="musicPreference" type="checkbox" value="Rap" ${musicPreference.Rap}><strong> ${errors.musicPreferences} </strong><br>
 		<input type="submit" value="Create Account" id='submit'>
 	</form>
+	<a href="/">Login</a>
 </body>
 
 </body>

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.groupProject.model.Song;
+import com.groupProject.model.User;
 
 /**
  *
@@ -81,8 +82,13 @@ public class SearchMusic extends HttpServlet {
                 songs = Song.getSongsByMediaType(request.getParameter("search_text"));
                 break;
         }
-        
-        return songs;
+        List<Song> result = new ArrayList<Song>();
+        songs.forEach(s -> {
+        	if (s.getUser().getUserId() == User.getCurrentUser(request).getUserId()) {
+        		result.add(s);
+        	}
+        });
+        return Song.getUniqueList(result);
     }
     
     private void setSession(HttpServletRequest request, HttpServletResponse response, List<Song> songs) 

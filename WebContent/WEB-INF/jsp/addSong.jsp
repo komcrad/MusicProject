@@ -13,8 +13,14 @@
 		Album Name*: <input name="albumName" type="text" value="${param.albumName}" required><strong> ${errors.albumName} </strong><br>
 		Length*: <input name="length" type="text" value="${param.length}" required><strong> ${errors.length} </strong><br>
 		Author*: <input name="author" type="text" value="${param.author}" required><strong> ${errors.author} </strong><br>
-		Media Type*: <input name="mediaType" type="text" value="${param.mediaType}" required><strong> ${errors.mediaType} </strong><br>	
+		Media Type*: <select name="mediaType" required>
+						<option value="Computer">Computer</option>
+						<option value="MP3 Player">MP3 Player</option>
+						<option value="CD">CD</option>
+						<option value="Vinyl">Vinyl</option>
+					</select><strong> ${errors.mediaType} </strong><br>	
 		<input type="submit">						
 	</form>
+	<a href="/UserLibrary">Library</a>
 </body>
 </html>

@@ -98,6 +98,7 @@
  
 
 	</form>
+	<a href="/UserLibrary">Library</a>
 </body>
 
 </body>
